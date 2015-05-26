@@ -1,0 +1,43 @@
+﻿@{
+    bool horizontal = ((bool)(ViewContext.RouteData.Values["horizontalNav"] ?? false));
+    string wrapperClasses = "btn-group btn-group-sm";
+}
+
+<li>
+    <a>
+        @Html.RouteLink("Главная", new
+                                       {
+                                           controller = "Home",
+                                           action = "HomePage",
+                                       },
+                                       new
+                                       {
+                                           @class = "btn btn-default btn-sm"
+                                       })
+    </a>
+</li>
+
+<li>
+    <a>
+        @Html.RouteLink("События", new
+                                   {
+                                       controller = "MeetingEvents",
+                                       action = "EventSummary",
+                                   }, new
+                                          {
+                                              @class = "btn btn-default btn-sm"
+                                          })
+    </a>
+</li>
+<li>
+    <a>
+        @Html.RouteLink("Контакты", new
+                                    {
+                                        controller = "Contacts",
+                                        action = "Information",
+                                    }, new
+                                           {
+                                               @class = "btn btn-default btn-sm"
+                                           })
+    </a>
+</li>

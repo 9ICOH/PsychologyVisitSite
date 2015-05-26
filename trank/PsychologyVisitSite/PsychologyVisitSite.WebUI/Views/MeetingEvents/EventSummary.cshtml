@@ -1,0 +1,32 @@
+﻿@model IEnumerable<PsychologyVisitSite.Domain.Entities.MeetingEvent>
+
+    @{
+        ViewBag.Title = "EventSummary";
+    }
+
+@foreach(var meetingEvent in Model)
+{
+    <div class="well">
+        @if (meetingEvent.ImageData != null)
+        {
+            <div class="pull-left" style="margin-right: 10px">
+                <img class="img-thumbnail" width="75" height="75"
+                     src="@Url.Action("GetImage", "MeetingEvents", new { meetingEvent.Id })" />
+            </div>
+        }
+
+        <h3>
+            <strong>@meetingEvent.Name</strong>
+            <span class="pull-right label label-primary">@meetingEvent.Price.ToString("# грн")</span>
+        </h3>
+        @using (Html.BeginForm("Registrate", "Registretion"))
+        {
+            <div class="pull-right">
+                @*@Html.HiddenFor(x => x.Id)*@
+                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                <input type="submit" class="btn btn-success" value="Зарегестрироваться" />
+            </div>
+        }
+        <span class="lead">@meetingEvent.Description</span>
+    </div>
+    }
