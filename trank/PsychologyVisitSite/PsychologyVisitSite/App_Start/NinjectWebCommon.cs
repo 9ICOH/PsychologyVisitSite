@@ -1,7 +1,10 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(PsychologyVisitSite.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(PsychologyVisitSite.App_Start.NinjectWebCommon), "Stop")]
 
-namespace PsychologyVisitSite.App_Start
+using PsychologyVisitSite.WebUI;
+
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
+
+namespace PsychologyVisitSite.WebUI
 {
     using System;
     using System.Web;
@@ -10,6 +13,8 @@ namespace PsychologyVisitSite.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+
+    using PsychologyVisitSite.WebUI.Infrastructure;
 
     public static class NinjectWebCommon 
     {
@@ -61,6 +66,7 @@ namespace PsychologyVisitSite.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            System.Web.Mvc.DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }        
     }
 }
