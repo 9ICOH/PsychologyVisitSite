@@ -1,0 +1,18 @@
+﻿
+namespace PsychologyVisitSite.Domain.Entities
+{
+    public class Information
+    {
+        public int VersionId { get; set; }
+
+        public string ContactInformation { get; set; }
+
+        public string SiteName { get; set; }
+
+        public string SiteDescription { get; set; }
+
+        public byte[] ImageData { get; set; }
+
+        public string ImageMimeType { get; set; }
+    }
+}

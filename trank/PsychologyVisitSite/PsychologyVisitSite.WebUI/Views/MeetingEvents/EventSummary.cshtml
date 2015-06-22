@@ -22,7 +22,7 @@
         @using (Html.BeginForm("Registrate", "Registretion"))
         {
             <div class="pull-right">
-                @*@Html.HiddenFor(x => x.Id)*@
+                @*@Html.HiddenFor(x => x.RegistrationsId)*@
                 @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
                 <input type="submit" class="btn btn-success" value="Зарегестрироваться" />
             </div>

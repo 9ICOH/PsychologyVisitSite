@@ -3,7 +3,7 @@ namespace PsychologyVisitSite.Domain.Abstract
 {
     using PsychologyVisitSite.Domain.Entities;
 
-    public interface IRegistrationRepository : IRepository<RegistrationForm>
+    public interface IInformationRepository : IRepository<Information>
     {
         int Delete(int id);
     }

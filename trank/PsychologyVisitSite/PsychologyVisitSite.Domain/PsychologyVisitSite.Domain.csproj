@@ -77,15 +77,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\EfRepository.cs" />
     <Compile Include="Abstract\IAuthProvider.cs" />
     <Compile Include="Abstract\IEventsRepository.cs" />
+    <Compile Include="Abstract\IInformationRepository.cs" />
     <Compile Include="Abstract\IRegisterProcessor.cs" />
     <Compile Include="Abstract\IRegistrationRepository.cs" />
+    <Compile Include="Abstract\IRepository.cs" />
+    <Compile Include="Abstract\ISettingsRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFEventsRepository.cs" />
+    <Compile Include="Concrete\EFInformationRepository.cs" />
     <Compile Include="Concrete\EFRegistrationRepository.cs" />
+    <Compile Include="Concrete\EFSettingsRepository.cs" />
     <Compile Include="Concrete\FormAuthProvider.cs" />
     <Compile Include="Concrete\RegisterProcessor.cs" />
+    <Compile Include="Entities\Information.cs" />
+    <Compile Include="Entities\Settings.cs" />
     <Compile Include="Enums\ContactType.cs" />
     <Compile Include="Enums\RelevantType.cs" />
     <Compile Include="Entities\MeetingEvent.cs" />

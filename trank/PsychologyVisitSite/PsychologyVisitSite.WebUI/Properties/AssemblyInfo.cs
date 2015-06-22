@@ -2,8 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
+// General informationRepository about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the informationRepository
 // associated with an assembly.
 [assembly: AssemblyTitle("PsychologyVisitSite.WebUI")]
 [assembly: AssemblyDescription("")]
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("50bbb8e4-3850-495b-bb64-b22b8fa71238")]
 
-// Version information for an assembly consists of the following four values:
+// Version informationRepository for an assembly consists of the following four values:
 //
 //      Major Version
 //      Minor Version 

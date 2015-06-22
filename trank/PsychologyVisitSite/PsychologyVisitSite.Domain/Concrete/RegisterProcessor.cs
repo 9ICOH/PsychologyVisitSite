@@ -15,7 +15,7 @@ namespace PsychologyVisitSite.Domain.Concrete
 
         public RegistrationForm ProcessRegistration(RegistrationForm registrationForm)
         {
-            this.repository.Save(registrationForm);
+            this.repository.Create(registrationForm);
             return registrationForm;
         }
     }

@@ -1,7 +1,7 @@
 ﻿@using System.Collections.Specialized
 @using PsychologyVisitSite.Domain.Entities
 
-@model RegistrationForm
+@model  IEnumerable<RegistrationForm>
 
 @{
     ViewBag.Title = "HomePage";
@@ -58,27 +58,47 @@
 
         //function viewResult() {
         //    this.showRegistrationList = false;
-        //    this.showInformationForm = true;
+        //    this.showinformationRepositoryForm = true;
         //    this.showSkillsForm = true;
         //    this.showRegistretionEnd = true;
         //    model.isReadonly = true;
         //};
 
-        function sendAjaxRequest(httpMethod, callback, url, reqData) {
-            $.ajax("/api/web" + (url ? "/" + url : ""), {
-                type: httpMethod,
-                success: callback,
-                data: reqData
-            });
+        function removeItem(item) {
+            sendAjaxRequest("DELETE", function () {
+                for (var i = 0; i < model.registrations().length; i++) {
+                    if (model.registrations()[i].Id == item.Id) {
+                        model.registrations.remove(model.registrations()[i]);
+                        break;
+                    }
+                }
+            }, "DeleteRegistration", item.Id);
         }
 
-        function getAllItems() {
-            sendAjaxRequest("GET", function (data) {
+        //function sendAjaxRequest(httpMethod, callback, url, reqData) {
+        //    $.ajax("/api/web" + (url ? "/" + url : ""), {
+        //        type: httpMethod,
+        //        success: callback,
+        //        data: reqData
+        //    });
+        //}
+
+        function getAllRegistrations() {
+            sendAjaxRequest("RegistrationApiController", "GET", function (data) {
                 model.registrations.removeAll();
                 for (var i = 0; i < data.length; i++) {
                     model.registrations.push(data[i]);
                 }
-            });
+            }, "Registrations");
+        }
+
+        function getAllItems() {
+            sendAjaxRequest("MeetingEventsApiController", "GET", function (data) {
+                model.registrations.removeAll();
+                for (var i = 0; i < data.length; i++) {
+                    model.registrations.push(data[i]);
+                }
+            }, "AllEvents");
         }
 
         function handleEditorClick() {
@@ -90,7 +110,7 @@
                 LastName: model.editor.lastName,
                 Location: model.editor.location,
                 Email: model.editor.email,
-                PhoneNumb: model.editor.phoneNumber,
+                PhoneNumber: model.editor.phoneNumber,
                 Skype: model.editor.skype,
                 Comment: model.editor.comment
             });
@@ -117,9 +137,8 @@
                         <th>Location</th>
                         <th>Email</th>
                         <th>Skype</th>
-                        <th>Phone</th>
+                        <th>Phone Number</th>
                     </tr>
-
                 </thead>
                 <tbody data-bind="foreach: model.registrations">
                     <tr>
@@ -128,13 +147,13 @@
                         <td data-bind="text: Location"></td>
                         <td data-bind="text: Email"></td>
                         <td data-bind="text: Skype"></td>
-                        <td data-bind="text: Phone"></td>
+                        <td data-bind="text: PhoneNumber"></td>
 
-                        @*<td>
+                        <td>
                                 <button class="btn btn-xs btn-primary" data-bind="click: removeItem">
                                     Delete
                                 </button>
-                            </td>*@
+                            </td>
                     </tr>
                 </tbody>
             </table>
@@ -145,9 +164,9 @@
     </div>
 
 
-    <div id="editor" class="section panel panel-primary" data-bind="visible: showInformationForm">
+    <div id="editor" class="section panel panel-primary" data-bind="visible: showinformationRepositoryForm">
         <div class="panel-heading">
-            Contact Information
+            Contact informationRepository
         </div>
         <div class="panel-body">
             <div class="form-group">
@@ -184,7 +203,7 @@
                 <input class="form-control" data-bind="value: model.editor.skype, readonly:model.isReadonly" />
             </div>
             <div class="form-group">
-                <label>Phone</label>
+                <label>Phone Number</label>
                 <input class="form-control" data-bind="value: model.editor.phoneNumber, readonly:model.isReadonly" />
             </div>
 
