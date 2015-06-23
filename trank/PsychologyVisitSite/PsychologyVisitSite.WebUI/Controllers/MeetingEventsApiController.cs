@@ -30,5 +30,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
             var events = this.repositoryCollector.EventsRepository.All().ToArray();
             return events;
         }
+
+
     }
 }

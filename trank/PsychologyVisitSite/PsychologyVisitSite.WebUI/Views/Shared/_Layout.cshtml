@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html ng-app>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,60 +9,17 @@
     <link href="~/Content/ErrorStyle.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-2.1.4.js"></script>
     <script src="~/Scripts/knockout-3.3.0.js"></script>
-    <script src="~/Scripts/Main.js"></script>
+    <script src="~/Scripts/app/Main.js"></script>
+    <script src="~/Scripts/app/Registrations.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
     <title>@ViewBag.Title</title>
 
-   @* <style>
-        .navbar-right {
-            float: right !important;
-            margin-right: 15px;
-            margin-left: 15px;
-        }
-    </style>*@
-    @RenderSection("Scripts")
+   @RenderSection("Scripts")
 </head>
 
-    <body>
-        
+<body>
 
-        @*   <div class="navbar navbar-inverse">
-    <div class="navbar-inner">
-        <a class="navbar-brand">
-            <span class="hidden-xs">Психологическая студия "Поляна женских тайн"</span>
-            <div class="visible-xs">Поляна женских тайн</div>
-        </a>
-
-        <ul class="nav">
-
-            @Html.RouteLink("Главная", new
-                                   {
-                                       controller = "Home",
-                                       action = "HomePage",
-                                   })
-
-
-            @Html.RouteLink("События", new
-       {
-           controller = "MeetingEvents",
-           action = "EventSummary",
-       })
-
-            @Html.RouteLink("Контакты", new
-                                {
-                                    controller = "Contacts",
-                                    action = "informationRepository",
-                                })
-
-             @Html.Action("Menu", "Nav")
-
-            @Html.Action("EventSummary", "NearestMeetingEvent")
-
-            </ul>
-        </div>
-    </div>*@
-
-    @*<div class="col-xs-12 col-sm-8">*@
-        @RenderSection("Body")
+    @RenderSection("Body")
 
 </body>
 </html>

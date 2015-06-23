@@ -7,7 +7,7 @@ namespace PsychologyVisitSite.Domain.Concrete
     public class EFSettingsRepository : EfRepository<Settings>, ISettingsRepository
     {
         public EFSettingsRepository(EFDbContext context)
-            : base(context)
+            : base(context, true)
         {
         }
 

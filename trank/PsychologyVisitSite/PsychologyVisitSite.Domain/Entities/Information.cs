@@ -1,8 +1,11 @@
 ﻿
 namespace PsychologyVisitSite.Domain.Entities
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Information
     {
+        [Key]
         public int VersionId { get; set; }
 
         public string ContactInformation { get; set; }

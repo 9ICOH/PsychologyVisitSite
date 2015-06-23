@@ -52,7 +52,7 @@ namespace PsychologyVisitSite.Domain.Abstract
         public T Create(T t)
         {
             this.DbSet.Add(t);
-            if (!this.ShareContext)
+          //  if (!this.ShareContext)
             {
                 this.context.SaveChanges();
             }

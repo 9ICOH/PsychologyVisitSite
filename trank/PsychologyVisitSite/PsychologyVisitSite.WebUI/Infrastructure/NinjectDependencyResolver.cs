@@ -106,8 +106,8 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
             this.kernel.Bind<IEventsRepository>().ToConstant(mockEvents.Object).WithConstructorArgument(efDbContext);
             this.kernel.Bind<IRegistrationRepository>().To<EFRegistrationRepository>().WithConstructorArgument(efDbContext);
             this.kernel.Bind<IRegisterProcessor>().To<RegisterProcessor>().WithConstructorArgument(efDbContext);
-           // this.kernel.Bind<ISettingsRepository>().To<Settings>().WithConstructorArgument(efDbContext);
-           // this.kernel.Bind<IInformationRepository>().To<informationRepository>().WithConstructorArgument(efDbContext);
+            this.kernel.Bind<ISettingsRepository>().To<EFSettingsRepository>().WithConstructorArgument(efDbContext);
+            this.kernel.Bind<IInformationRepository>().To<EFInformationRepository>().WithConstructorArgument(efDbContext);
 
             this.kernel.Bind<ICollector>().To<RepositoryCollector>();
         }

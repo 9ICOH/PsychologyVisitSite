@@ -8,7 +8,7 @@ namespace PsychologyVisitSite.Domain.Concrete
     {
 
         public EFRegistrationRepository(EFDbContext context)
-            : base(context)
+            : base(context, true)
         {
         }
 

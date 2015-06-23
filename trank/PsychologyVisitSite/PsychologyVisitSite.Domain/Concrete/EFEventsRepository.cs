@@ -7,7 +7,7 @@ namespace PsychologyVisitSite.Domain.Concrete
     public class EFEventsRepository : EfRepository<MeetingEvent>, IEventsRepository
     {
         public EFEventsRepository(EFDbContext context)
-            : base(context)
+            : base(context, true)
         {
         }
 
