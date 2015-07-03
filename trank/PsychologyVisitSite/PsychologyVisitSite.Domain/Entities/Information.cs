@@ -14,8 +14,6 @@ namespace PsychologyVisitSite.Domain.Entities
 
         public string SiteDescription { get; set; }
 
-        public byte[] ImageData { get; set; }
-
-        public string ImageMimeType { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

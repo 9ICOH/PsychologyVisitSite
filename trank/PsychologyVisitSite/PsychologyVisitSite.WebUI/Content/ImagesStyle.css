@@ -1,0 +1,22 @@
+﻿.img_wrapper{
+    position: relative;
+    padding-top: 75%;
+    overflow: hidden;
+}
+ 
+.img_wrapper img{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+}
+
+.img_wrapper.loaded img{
+    opacity: 1;
+}
+
+.main_img {
+    height: 600px; /* Высота блока */
+    width: 500px; /* Ширина блока */
+    position: relative;
+}

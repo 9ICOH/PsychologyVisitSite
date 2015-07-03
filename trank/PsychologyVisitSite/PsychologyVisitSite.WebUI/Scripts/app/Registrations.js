@@ -2,25 +2,30 @@
     $scope.registration = {}
 
     $scope.getAllRegistrations = function () {
-        $scope.name = 'start';
-
-        sendAjaxRequest("GET",
+        sendSimpleAjaxRequest("GET",
             function (data) {
                 $scope.registrations = data;
-                $scope.name = 'finish';
+                $scope.$apply();
             },
             "RegistrationApi/Registrations");
     }
 
-    $scope.createRegistration = function () {
-        $scope.name = 'start';
+    $scope.getLastRegistration = function () {
+        sendSimpleAjaxRequest("GET",
+            function (data) {
+                $scope.lastRegistration = data;
+                $scope.$apply();
+            },
+            "RegistrationApi/LastRegistration");
+    }
 
-        sendAjaxRequest("POST",
+    $scope.createRegistration = function () {
+        sendSimpleAjaxRequest("POST",
             function () {
-                $scope.name = 'finish';
                 $scope.getAllRegistrations.call();
             },
             "RegistrationApi/AddRegistrationItem", $scope.registration);
+        $scope.registration = null;
     }
 
 }

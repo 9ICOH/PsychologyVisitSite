@@ -31,6 +31,16 @@ namespace PsychologyVisitSite.WebUI.Controllers
             return events;
         }
 
+        [HttpPost]
+        public MeetingEvent AddMeetingEvent(MeetingEvent meetingEvent)
+        {
+            return this.repositoryCollector.EventsRepository.Create(meetingEvent);
+        }
 
+        [HttpDelete]
+        public void DeleteMeetingEvent(int id)
+        {
+            this.repositoryCollector.EventsRepository.Delete(id);
+        }
     }
 }

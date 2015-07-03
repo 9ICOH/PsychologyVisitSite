@@ -52,7 +52,7 @@ namespace PsychologyVisitSite.Domain.Abstract
         public T Create(T t)
         {
             this.DbSet.Add(t);
-          //  if (!this.ShareContext)
+            //  if (!this.ShareContext)
             {
                 this.context.SaveChanges();
             }
@@ -136,7 +136,9 @@ namespace PsychologyVisitSite.Domain.Abstract
 
         public T LastOrDefault()
         {
-            return this.DbSet.LastOrDefault();
+            //todo exception throws here
+            var te = this.All().AsEnumerable();
+            return te.LastOrDefault();
         }
 
         public void Dispose()

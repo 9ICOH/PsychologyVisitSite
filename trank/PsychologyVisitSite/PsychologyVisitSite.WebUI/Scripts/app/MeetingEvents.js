@@ -3,10 +3,11 @@
     $scope.action = function() {
         $scope.name = 'start';
 
-        sendAjaxRequest("GET",
+        sendSimpleAjaxRequest("GET",
             function(data) {
                 $scope.data = data;
                 $scope.name = 'finish';
+                $scope.$apply();
             },
             "MeetingEventsApi/NearestEvent");
     }

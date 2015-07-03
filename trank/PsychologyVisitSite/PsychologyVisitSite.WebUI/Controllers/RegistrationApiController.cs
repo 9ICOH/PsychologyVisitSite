@@ -35,7 +35,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<RegistrationForm> Registrations(int eventId)
+        public IEnumerable<RegistrationForm> Registration(int eventId)
         {
             return this.repositoryCollector.RegistrationRepository.FindAll(reg => reg.EventId == eventId).ToArray();
         }

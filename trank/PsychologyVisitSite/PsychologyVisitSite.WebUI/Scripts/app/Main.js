@@ -1,66 +1,91 @@
 ﻿
-function sendAjaxRequest( httpMethod, callback, url, reqData) {
+function sendSimpleAjaxRequest(httpMethod, callback, url, reqData) {
     $.ajax("/api" + (url ? "/" + url : ""), {
         type: httpMethod,
         success: callback,
-        data: reqData
+        data: reqData,
+        error: function (xhr, status) {
+        alert(status);
+    }
     });
 }
 
 function MainCtrl($scope) {
 
-    //$scope.action = function () {
-    //    $scope.name = 'start';
+    $scope.loadImage = function (srcMain) {
+        document.getElementById('imgMain').src = srcMain;
+    }
 
-    //    sendAjaxRequest("GET",
-    //        function (data) {
-    //            $scope.data = data;
-    //            $scope.name = 'finish';
-    //        },
-    //        "MeetingEventsApi/NearestEvent");
-    //}
+    $scope.uploadImage = function () {
+        var files = document.getElementById('uploadImgs').files;
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
 
-   //function removeItem(item) {
-    //    sendAjaxRequest("DELETE", function () {
-    //        for (var i = 0; i < model.registrations().length; i++) {
-    //            if (model.registrations()[i].Id == item.Id) {
-    //                model.registrations.remove(model.registrations()[i]);
-    //                break;
-    //            }
-    //        }
-    //    }, "DeleteRegistration", item.Id);
-    //}
+                //sendSimpleAjaxRequest("POST",
+                //     function (result) {
+                //         alert(result);
+                //     }, "InformationApi/UploadFile", data);
 
-    //function getAllRegistrations() {
-    //    sendAjaxRequest("RegistrationApiController", "GET", function (data) {
-    //        model.registrations.removeAll();
-    //        for (var i = 0; i < data.length; i++) {
-    //            model.registrations.push(data[i]);
-    //        }
-    //    }, "Registrations");
-    //}
+                $.ajax({
+                    type: "POST",
+                    url: '/api/InformationApi/UploadFile',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (xhr, status, p3) {
+                        alert(status);
+                    }
+                });
 
-    //function getAllItems() {
-    //    sendAjaxRequest("MeetingEventsApiController", "GET", function (data) {
-    //        model.registrations.removeAll();
-    //        for (var i = 0; i < data.length; i++) {
-    //            model.registrations.push(data[i]);
-    //        }
-    //    }, "AllEvents");
-    //}
+            } else {
+                alert("Браузер не поддерживает загрузку файлов HTML5!");
+            }
+        }
+    }
 
-    //function handleEditorClick() {
-    //    sendAjaxRequest("POST", function (newItem) {
-    //        model.registrations.push(newItem);
-    //        resetClicks();
-    //    }, null, {
-    //        FirstName: model.editor.firstName,
-    //        LastName: model.editor.lastName,
-    //        Location: model.editor.location,
-    //        Email: model.editor.email,
-    //        PhoneNumber: model.editor.phoneNumber,
-    //        Skype: model.editor.skype,
-    //        Comment: model.editor.comment
-    //    });
-    //}
+    $scope.getLastInformation = function () {
+        sendSimpleAjaxRequest("GET",
+            function (data) {
+                $scope.information = data;
+                $scope.$apply();
+            },
+            "InformationApi/LastInformation");
+    }
+
+    $scope.showMainImg = function () {
+        sendSimpleAjaxRequest("GET",
+            function (src) {
+                $scope.loadImage(src);
+                $scope.$apply();
+            },
+            "InformationApi/GetMainImgUrl");
+    }
 }
+
+function showImgs(e) {
+
+    var files = e.target.files;
+    for (var i = 0, f; f = files[i]; i++) {
+
+        if (!f.type.match('image.*')) continue;
+
+        var fr = new FileReader();
+        fr.onload = (function (theFile) {
+            return function (ev) {
+                var li = document.createElement('li');
+                li.innerHTML = "<div class='.img_wrapper.loaded'>" + "<img src='" + ev.target.result + "' />" + "</div>";
+                document.getElementById('list').insertBefore(li, null);
+            };
+        })(f);
+
+        fr.readAsDataURL(f);
+    }
+}
+

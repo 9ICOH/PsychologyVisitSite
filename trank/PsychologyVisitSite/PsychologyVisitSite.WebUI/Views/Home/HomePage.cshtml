@@ -1,236 +1,30 @@
-﻿@using PsychologyVisitSite.Domain.Entities
-
-@model  IEnumerable<RegistrationForm>
-
-@{
+﻿@{
     ViewBag.Title = "HomePage";
 }
 
 @section Scripts
 {
     <script>
-        //var model = {
-        //    registrations: ko.observableArray(),
-        //    editor: {
-        //        firstName: ko.observable(""),
-        //        lastName: ko.observable(""),
-        //        location: ko.observable(""),
-        //        contactVia: ko.observable([""]),
-        //        email: ko.observable(""),
-        //        phoneNumber: ko.observable(""),
-        //        skype: ko.observable(""),
-        //        comment: ko.observable("")
-        //    },
-        //    technologies: ko.observable(".NET"),
-        //    technologiesList: [".NET", "HTML", "Java", "Javascript"],
-        //    languages: ko.observable("English"),
-        //    languagesList: ["English", "Chinese"],
-        //    booleanValue: ko.observable(false),
-        //    isReadonly: ko.observable(false),
-        //    numberOfClicks: ko.observable(0)
-        //};
-
-
-        //function nextPageClick() {
-        //    model.numberOfClicks(model.numberOfClicks() + 1);
-        //};
-
-        //function resetClicks() {
-        //    model.numberOfClicks(0);
-        //};
-
-        //this.showRegistrationList = ko.pureComputed(function () {
-        //    return model.numberOfClicks() == 0;
-        //}, this);
-
-        //this.showInformationForm = ko.pureComputed(function () {
-        //    return model.numberOfClicks() == 1;
-        //}, this);
-
-        //this.showSkillsForm = ko.pureComputed(function () {
-        //    return model.numberOfClicks() == 2;
-        //}, this);
-
-        //this.showRegistretionEnd = ko.pureComputed(function () {
-        //    return model.numberOfClicks() == 3;
-        //}, this);
-
-        ////function viewResult() {
-        ////    this.showRegistrationList = false;
-        ////    this.showinformationRepositoryForm = true;
-        ////    this.showSkillsForm = true;
-        ////    this.showRegistretionEnd = true;
-        ////    model.isReadonly = true;
-        ////};
-
-        //function removeItem(item) {
-        //    sendAjaxRequest("DELETE", function () {
-        //        for (var i = 0; i < model.registrations().length; i++) {
-        //            if (model.registrations()[i].Id == item.Id) {
-        //                model.registrations.remove(model.registrations()[i]);
-        //                break;
-        //            }
-        //        }
-        //    }, "DeleteRegistration", item.Id);
-        //}
-
-        //function getAllRegistrations() {
-        //    sendAjaxRequest("RegistrationApiController", "GET", function (data) {
-        //        model.registrations.removeAll();
-        //        for (var i = 0; i < data.length; i++) {
-        //            model.registrations.push(data[i]);
-        //        }
-        //    }, "Registrations");
-        //}
-
-        //function getAllItems() {
-        //    sendAjaxRequest("MeetingEventsApiController", "GET", function (data) {
-        //        model.registrations.removeAll();
-        //        for (var i = 0; i < data.length; i++) {
-        //            model.registrations.push(data[i]);
-        //        }
-        //    }, "AllEvents");
-        //}
-
-        //function handleEditorClick() {
-        //    sendAjaxRequest("POST", function (newItem) {
-        //        model.registrations.push(newItem);
-        //        resetClicks();
-        //    }, null, {
-        //        FirstName: model.editor.firstName,
-        //        LastName: model.editor.lastName,
-        //        Location: model.editor.location,
-        //        Email: model.editor.email,
-        //        PhoneNumber: model.editor.phoneNumber,
-        //        Skype: model.editor.skype,
-        //        Comment: model.editor.comment
-        //    });
-        //}
-
-        //$(document).ready(function () {
-        //    getAllItems();
-        //    ko.applyBindings(model);
-        //});
-
+        $(document).ready(function () {
+            document.getElementById('uploadImgs').addEventListener('change', showImgs, false);
+        });
     </script>
 }
 
 @section Body
 {
-    @*<div id="summary" class="section panel panel-primary" data-bind="visible: showRegistrationList">
-            <div class="panel-heading">Все заказы</div>
-            <div class="panel-body">
-                <table class="table table-striped table-condensed">
-                    <thead>
-                        <tr>
-                            <th>FirstName</th>
-                            <th>LastName</th>
-                            <th>Location</th>
-                            <th>Email</th>
-                            <th>Skype</th>
-                            <th>Phone Number</th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: model.registrations">
-                        <tr>
-                            <td data-bind="text: FirstName"></td>
-                            <td data-bind="text: LastName"></td>
-                            <td data-bind="text: Location"></td>
-                            <td data-bind="text: Email"></td>
-                            <td data-bind="text: Skype"></td>
-                            <td data-bind="text: PhoneNumber"></td>
+    <div ng-controller="MainCtrl">
 
-                            <td>
-                                <button class="btn btn-xs btn-primary" data-bind="click: removeItem">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="btn btn-primary" data-bind="click: nextPageClick">
-                    Registrate
-                </button>
-            </div>
-        </div>
+        <input type="file" name="files[]" id="uploadImgs" multiple />
 
+        <output id="list"></output>
 
-        <div id="editor" class="section panel panel-primary" data-bind="visible: showinformationRepositoryForm">
-            <div class="panel-heading">
-                Contact informationRepository
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input class="form-control" data-bind="value: model.editor.firstName, readonly:model.isReadonly" />
-                </div>
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input class="form-control" data-bind="value: model.editor.lastName, readonly:model.isReadonly" />
-                </div>
-                <div class="form-group">
-                    <label>Location</label>
-                    <input class="form-control" data-bind="value: model.editor.location, readonly:model.isReadonly" />
-                </div>
+        <button class="btn btn-primary" ng-click="uploadImage()">Сохранить</button>
 
-                <div class="form-group">
-                    <label>Contact via: </label>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="checkbox" data-bind="checked: model.booleanValue" />
-                        <label>Skype</label>
-                        <input type="checkbox" data-bind="checked: model.booleanValue" />
-                        <label>Phone</label>
-                        <input type="checkbox" data-bind="checked: model.booleanValue" />
-                    </div>
-                </div>
+        <img id="imgMain" class="main_img" alt="Нет картинки" ng-init="showMainImg()" />
+    </div>
 
-                <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" data-bind="value: model.editor.email, readonly:model.isReadonly" />
-                </div>
-                <div class="form-group">
-                    <label>Skype</label>
-                    <input class="form-control" data-bind="value: model.editor.skype, readonly:model.isReadonly" />
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input class="form-control" data-bind="value: model.editor.phoneNumber, readonly:model.isReadonly" />
-                </div>
-
-                <button class="btn btn-primary" data-bind="click: nextPageClick">
-                    Next
-                </button>
-            </div>
-        </div>
-
-        <div id="editor" class="section panel panel-primary" data-bind="visible: showSkillsForm">
-            <div class="panel-heading">
-                Skills
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label>Technologies</label>
-                    <select multiple="multiple" data-bind="options: model.technologiesList, selectedOptions: model.technologies"></select>
-                </div>
-                <div class="form-group">
-                    <label>Languages</label>
-                    <select multiple="multiple" data-bind="options: model.languagesList, selectedOptions: model.languages"></select>
-                </div>
-
-                <button class="btn btn-primary" data-bind="click: nextPageClick">
-                    Submit
-                </button>
-            </div>
-        </div>
-        <div id="editor" class="section panel panel-primary" data-bind="visible: showRegistretionEnd">
-            <button data-bind="click:handleEditorClick">OK</button>
-        </div>*@
-
-    <div ng-controller="RegistrationsCtrl">
-        {{name}}
-
-
+    <div ng-controller="RegistrationsCtrl" ng-cloak ng-init="getLastRegistration()">
 
         <div id="editor" class="section panel panel-primary">
             <div class="panel-heading">
@@ -238,55 +32,33 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label>First Name</label>
-                    <input class="form-control" ng-model="registration.FirstName" />
+                    <input class="form-control" ng-model="registration.FirstName" placeholder="First Name" />
                 </div>
                 <div class="form-group">
-                    <label>Last Name</label>
-                    <input class="form-control" ng-model="registration.LastName" />
+                    <input class="form-control" ng-model="registration.LastName" placeholder="Last Name" />
                 </div>
                 <div class="form-group">
-                    <label>Location</label>
-                    <input class="form-control" ng-model="registration.Location" />
-                </div>
-
-                @*<div class="form-group">
-                        <label>Contact via: </label>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="checkbox" data-bind="checked: registration.booleanValue" />
-                            <label>Skype</label>
-                            <input type="checkbox" data-bind="checked: registration.booleanValue" />
-                            <label>Phone</label>
-                            <input type="checkbox" data-bind="checked: registration.booleanValue" />
-                        </div>
-                    </div>*@
-
-                <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" ng-model="registration.Email" />
+                    <input class="form-control" ng-model="registration.Location" placeholder="Location" />
                 </div>
                 <div class="form-group">
-                    <label>Skype</label>
-                    <input class="form-control" ng-model="registration.Skype" />
+                    <input class="form-control" ng-model="registration.Email" placeholder="Email" />
                 </div>
                 <div class="form-group">
-                    <label>Phone Number</label>
-                    <input class="form-control" ng-model="registration.PhoneNumber" />
+                    <input class="form-control" ng-model="registration.Skype" placeholder="Skype" />
                 </div>
-
                 <div class="form-group">
-                    <label>Comment</label>
-                    <input class="form-control" ng-model="registration.Comment" />
+                    <input class="form-control" ng-model="registration.PhoneNumber" placeholder="Phone Number" />
                 </div>
-
+                <div class="form-group">
+                    <input class="form-control" ng-model="registration.Comment" placeholder="Comment" />
+                </div>
                 <button class="btn btn-primary" ng-click="createRegistration()">
                     Create
                 </button>
             </div>
         </div>
 
-        <div class="panel-body" ng-bind="registrations">
+        <div class="panel-body">
             <table class="table table-striped table-condensed">
                 <thead>
                     <tr>

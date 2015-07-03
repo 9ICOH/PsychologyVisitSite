@@ -14,6 +14,7 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
     using PsychologyVisitSite.Domain.Concrete;
     using PsychologyVisitSite.Domain.Entities;
     using PsychologyVisitSite.Domain.Enums;
+    using PsychologyVisitSite.Domain.Service;
 
     public class NinjectDependencyResolver : IDependencyResolver
     {
@@ -101,13 +102,16 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
                         return null;
                     });
 
-
+            ///DB Repositories
             var efDbContext = new EFDbContext();
             this.kernel.Bind<IEventsRepository>().ToConstant(mockEvents.Object).WithConstructorArgument(efDbContext);
             this.kernel.Bind<IRegistrationRepository>().To<EFRegistrationRepository>().WithConstructorArgument(efDbContext);
             this.kernel.Bind<IRegisterProcessor>().To<RegisterProcessor>().WithConstructorArgument(efDbContext);
             this.kernel.Bind<ISettingsRepository>().To<EFSettingsRepository>().WithConstructorArgument(efDbContext);
             this.kernel.Bind<IInformationRepository>().To<EFInformationRepository>().WithConstructorArgument(efDbContext);
+
+            var credentials = new AwsServiceCredentials("freeimg", "AKIAJEWFJ4CAGVG2VENQ", "R+uqBsWUB+xQ2YirL+RtYX5oP4eD9stc06lEvuYg");
+            this.kernel.Bind<IContentService>().To<AwsContentService>().WithConstructorArgument(credentials);
 
             this.kernel.Bind<ICollector>().To<RepositoryCollector>();
         }
