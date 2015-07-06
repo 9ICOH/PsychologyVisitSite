@@ -7,39 +7,37 @@ namespace PsychologyVisitSite.WebUI.Controllers
 
     using PsychologyVisitSite.Domain.Abstract;
     using PsychologyVisitSite.Domain.Entities;
-    using PsychologyVisitSite.WebUI.Infrastructure;
 
     public class InformationApiController : ApiController
     {
-        private readonly ICollector repositoryCollector;
+        private readonly IInformationRepository informationRepository;
 
         private readonly IContentService contentService;
 
-        public InformationApiController(ICollector repositoryCollector, IContentService contentService)
+        public InformationApiController(IInformationRepository informationRepository, IContentService contentService)
         {
-            this.repositoryCollector = repositoryCollector;
+            this.informationRepository = informationRepository;
             this.contentService = contentService;
         }
 
         [HttpPost]
         public Information AddInformationItem(Information informationItem)
         {
-            return this.repositoryCollector.InformationRepository.Create(informationItem);
+            return this.informationRepository.Create(informationItem);
         }
 
         [HttpGet]
         public Information LastInformation()
         {
-            var lastInformation = this.repositoryCollector.InformationRepository.LastOrDefault();
+            var lastInformation = this.informationRepository.LastOrDefault();
             return lastInformation;
         }
 
         [HttpGet]
         public string GetMainImgUrl()
         {
-            var inform = this.repositoryCollector.InformationRepository.LastOrDefault();
+            var inform = this.informationRepository.LastOrDefault();
             return inform != null ? inform.ImageUrl : string.Empty;
-           // return string.Empty;
         }
 
         [HttpPost]
@@ -59,12 +57,19 @@ namespace PsychologyVisitSite.WebUI.Controllers
                 var fileStream = await file.ReadAsStreamAsync();
                 this.contentService.UploadContentObject(fileStream, filename);
 
-                this.repositoryCollector.InformationRepository.Create(new Information
+                this.informationRepository.Create(new Information
                                                                           {
                                                                               ImageUrl = this.contentService.GenerateContentUrl(filename)
                                                                           });
             }
             return this.Ok("файлы загружены");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            this.informationRepository.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 }

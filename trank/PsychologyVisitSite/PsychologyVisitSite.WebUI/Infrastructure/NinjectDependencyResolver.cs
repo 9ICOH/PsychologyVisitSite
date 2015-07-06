@@ -3,7 +3,6 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Web.Mvc;
 
     using Moq;
@@ -103,14 +102,14 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
                     });
 
             ///DB Repositories
-            var efDbContext = new EFDbContext();
-           // this.kernel.Bind<IEventsRepository>().ToConstant(mockEvents.Object).WithConstructorArgument(efDbContext);
-            this.kernel.Bind<IEventsRepository>().To<EFEventsRepository>().WithConstructorArgument(efDbContext);
-            this.kernel.Bind<IRegistrationRepository>().To<EFRegistrationRepository>().WithConstructorArgument(efDbContext);
-            this.kernel.Bind<IRegisterProcessor>().To<RegisterProcessor>().WithConstructorArgument(efDbContext);
-            this.kernel.Bind<ISettingsRepository>().To<EFSettingsRepository>().WithConstructorArgument(efDbContext);
-            this.kernel.Bind<IInformationRepository>().To<EFInformationRepository>().WithConstructorArgument(efDbContext);
-            this.kernel.Bind<ICollector>().To<RepositoryCollector>();
+            // this.kernel.Bind<IEventsRepository>().ToConstant(mockEvents.Object).WithConstructorArgument(efDbContext);
+
+            this.kernel.Bind<IEventsRepository>().To<EFEventsRepository>();
+            this.kernel.Bind<IRegistrationRepository>().To<EFRegistrationRepository>();
+            this.kernel.Bind<ISettingsRepository>().To<EFSettingsRepository>();
+            this.kernel.Bind<IInformationRepository>().To<EFInformationRepository>();
+
+            this.kernel.Bind<IRegisterProcessor>().To<RegisterProcessor>();
 
             var credentials = new AwsServiceCredentials("freeimg", "AKIAJEWFJ4CAGVG2VENQ", "R+uqBsWUB+xQ2YirL+RtYX5oP4eD9stc06lEvuYg");
             this.kernel.Bind<IContentService>().To<AwsContentService>().WithConstructorArgument(credentials);

@@ -5,42 +5,42 @@ namespace PsychologyVisitSite.WebUI.Controllers
     using System.Linq;
     using System.Web.Http;
 
+    using PsychologyVisitSite.Domain.Abstract;
     using PsychologyVisitSite.Domain.Entities;
-    using PsychologyVisitSite.WebUI.Infrastructure;
 
     public class MeetingEventsApiController : ApiController
     {
-        private readonly ICollector repositoryCollector;
+        private readonly IEventsRepository eventsRepository;
 
-        public MeetingEventsApiController(ICollector repositoryCollector)
+        public MeetingEventsApiController(IEventsRepository eventsRepository)
         {
-            this.repositoryCollector = repositoryCollector;
+            this.eventsRepository = eventsRepository;
         }
 
         [HttpGet]
         public MeetingEvent NearestEvent()
         {
-            var lastEvent = this.repositoryCollector.EventsRepository.LastOrDefault();
+            var lastEvent = this.eventsRepository.LastOrDefault();
             return lastEvent;
         }
 
         [HttpGet]
         public IEnumerable<MeetingEvent> AllEvents()
         {
-            var events = this.repositoryCollector.EventsRepository.All().ToArray();
+            var events = this.eventsRepository.All().ToArray();
             return events;
         }
 
         [HttpPost]
         public MeetingEvent AddMeetingEvent(MeetingEvent meetingEvent)
         {
-            return this.repositoryCollector.EventsRepository.Create(meetingEvent);
+            return this.eventsRepository.Create(meetingEvent);
         }
 
         [HttpDelete]
         public void DeleteMeetingEvent(int id)
         {
-            this.repositoryCollector.EventsRepository.Delete(id);
+            this.eventsRepository.Delete(id);
         }
     }
 }

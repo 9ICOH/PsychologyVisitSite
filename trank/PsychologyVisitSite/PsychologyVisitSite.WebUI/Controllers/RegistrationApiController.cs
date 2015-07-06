@@ -7,43 +7,42 @@ namespace PsychologyVisitSite.WebUI.Controllers
 
     using PsychologyVisitSite.Domain.Abstract;
     using PsychologyVisitSite.Domain.Entities;
-    using PsychologyVisitSite.WebUI.Infrastructure;
 
     public class RegistrationApiController : ApiController
     {
-        private readonly ICollector repositoryCollector;
+        private readonly IRegistrationRepository registrationRepository;
 
         private readonly IRegisterProcessor registerProcessor;
 
-        public RegistrationApiController(ICollector repositoryCollector, IRegisterProcessor registerProcessor)
+        public RegistrationApiController(IRegistrationRepository registrationRepository, IRegisterProcessor registerProcessor)
         {
-            this.repositoryCollector = repositoryCollector;
+            this.registrationRepository = registrationRepository;
             this.registerProcessor = registerProcessor;
         }
 
         [HttpGet]
         public RegistrationForm LastRegistration()
         {
-            var lastRegistration = this.repositoryCollector.RegistrationRepository.LastOrDefault();
+            var lastRegistration = this.registrationRepository.LastOrDefault();
             return lastRegistration;
         }
 
         [HttpDelete]
         public void DeleteRegistration(int id)
         {
-            this.repositoryCollector.RegistrationRepository.Delete(id);
+            this.registrationRepository.Delete(id);
         }
 
         [HttpGet]
         public IEnumerable<RegistrationForm> Registration(int eventId)
         {
-            return this.repositoryCollector.RegistrationRepository.FindAll(reg => reg.EventId == eventId).ToArray();
+            return this.registrationRepository.FindAll(reg => reg.EventId == eventId).ToArray();
         }
 
         [HttpGet]
         public IEnumerable<RegistrationForm> Registrations()
         {
-            return this.repositoryCollector.RegistrationRepository.All().ToArray();
+            return this.registrationRepository.All().ToArray();
         }
 
         [HttpPost]

@@ -5,29 +5,24 @@ namespace PsychologyVisitSite.Domain.Abstract
     using System.Data.Entity;
     using System.Linq;
 
-    public class EfRepository<T> : IRepository<T>
+    public abstract class EfRepository<C, T> : IRepository<T>
         where T : class
+        where C : DbContext, new()
     {
-        protected readonly bool ShareContext;
-
-        private readonly DbContext context;
-
-        public EfRepository(DbContext context)
-            : this(context, false)
+        private C entities = new C();
+        public C Context
         {
-        }
 
-        public EfRepository(DbContext context, bool sharedContext)
-        {
-            this.context = context;
-            this.ShareContext = sharedContext;
+            get { return this.entities; }
+            set { this.entities = value; }
         }
 
         protected DbSet<T> DbSet
         {
             get
             {
-                return this.context.Set<T>();
+                Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DbContext>());
+                return this.Context.Set<T>();
             }
         }
 
@@ -52,23 +47,14 @@ namespace PsychologyVisitSite.Domain.Abstract
         public T Create(T t)
         {
             this.DbSet.Add(t);
-            //  if (!this.ShareContext)
-            {
-                this.context.SaveChanges();
-            }
-
+            this.Context.SaveChanges();
             return t;
         }
 
         public int Delete(T t)
         {
             this.DbSet.Remove(t);
-            if (!this.ShareContext)
-            {
-                return this.context.SaveChanges();
-            }
-
-            return 0;
+            return this.Context.SaveChanges();
         }
 
         public int Delete(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
@@ -79,12 +65,7 @@ namespace PsychologyVisitSite.Domain.Abstract
                 this.DbSet.Remove(record);
             }
 
-            if (!this.ShareContext)
-            {
-                return this.context.SaveChanges();
-            }
-
-            return 0;
+            return this.Context.SaveChanges();
         }
 
         public T Find(params object[] keys)
@@ -121,35 +102,24 @@ namespace PsychologyVisitSite.Domain.Abstract
 
         public int Update(T t)
         {
-            var entry = this.context.Entry(t);
+            var entry = this.Context.Entry(t);
             this.DbSet.Attach(t);
 
             entry.State = EntityState.Modified;
-
-            if (!this.ShareContext)
-            {
-                return this.context.SaveChanges();
-            }
-
-            return 0;
+            return this.Context.SaveChanges();
         }
 
         public T LastOrDefault()
         {
-            //todo exception throws here
-            return this.DbSet.First();
+            var en = this.All().AsEnumerable();
+            return en.LastOrDefault();
         }
 
         public void Dispose()
         {
-            if (!this.ShareContext && this.context != null)
+            if (this.Context != null)
             {
-                //  try
-                //  {
-                this.context.Dispose();
-                //   }
-                //   catch { }
-
+                this.Context.Dispose();
             }
         }
     }

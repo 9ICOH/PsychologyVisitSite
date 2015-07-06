@@ -63,25 +63,21 @@ namespace PsychologyVisitSite.Domain.Service
         {
             try
             {
-                var fileTransferUtility = new TransferUtility(new AmazonS3Client(this.credentials.SecretAccessKeyId, this.credentials.SecretAccessKey, Amazon.RegionEndpoint.USEast1));
-                fileTransferUtility.Upload(objectStream, this.credentials.BucketName, key);
+                var client = new AmazonS3Client(this.credentials.SecretAccessKeyId, this.credentials.SecretAccessKey, Amazon.RegionEndpoint.USEast1);
 
-                //// 4.Specify advanced settings/options.
-                //var fileTransferUtilityRequest = new TransferUtilityUploadRequest
-                //{
-                //    BucketName = this.bucketName,
-                //    FilePath = filePath,
-                //    StorageClass = S3StorageClass.ReducedRedundancy,
-                //    PartSize = 6291456, // 6 MB.
-                //    Key = key,
-                //    CannedACL = S3CannedACL.PublicRead
-                //};
+                var fileTransferUtility = new TransferUtility(client);
+                var fileTransferUtilityRequest = new TransferUtilityUploadRequest
+                {
+                    BucketName = this.credentials.BucketName,
+                    Key = key,
+                    InputStream = objectStream,
+                    CannedACL = S3CannedACL.PublicRead,
+                    StorageClass = S3StorageClass.ReducedRedundancy,
+                };
 
-                //fileTransferUtilityRequest.Metadata.Add("param1", "Value1");
-                //fileTransferUtilityRequest.Metadata.Add("param2", "Value2");
-                //fileTransferUtility.Upload(fileTransferUtilityRequest);
+                fileTransferUtility.Upload(fileTransferUtilityRequest);
             }
-            catch (AmazonS3Exception s3Exception)
+            catch (Exception s3Exception)
             {
                 var t = s3Exception;
             }
