@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyVisitSite.Domain", "PsychologyVisitSite.Domain\PsychologyVisitSite.Domain.csproj", "{206FF0A3-AA90-4D44-985F-EEF1C4A9F547}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyVisitSite.WebUI", "PsychologyVisitSite.WebUI\PsychologyVisitSite.WebUI.csproj", "{4BD3D6C1-4242-4ACA-800A-977D3982EC51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsychologyVisitSite.Dal", "PsychologyVisitSite.Dal\PsychologyVisitSite.Dal.csproj", "{193556EC-037D-4E39-843F-A93CB508313B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4BD3D6C1-4242-4ACA-800A-977D3982EC51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BD3D6C1-4242-4ACA-800A-977D3982EC51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BD3D6C1-4242-4ACA-800A-977D3982EC51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{193556EC-037D-4E39-843F-A93CB508313B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{193556EC-037D-4E39-843F-A93CB508313B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{193556EC-037D-4E39-843F-A93CB508313B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{193556EC-037D-4E39-843F-A93CB508313B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
