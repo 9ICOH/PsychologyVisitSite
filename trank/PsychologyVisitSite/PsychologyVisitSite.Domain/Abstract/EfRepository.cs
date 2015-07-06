@@ -137,8 +137,7 @@ namespace PsychologyVisitSite.Domain.Abstract
         public T LastOrDefault()
         {
             //todo exception throws here
-            var te = this.All().AsEnumerable();
-            return te.LastOrDefault();
+            return this.DbSet.First();
         }
 
         public void Dispose()

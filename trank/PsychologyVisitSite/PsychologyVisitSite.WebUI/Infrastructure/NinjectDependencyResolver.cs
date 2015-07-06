@@ -104,16 +104,16 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
 
             ///DB Repositories
             var efDbContext = new EFDbContext();
-            this.kernel.Bind<IEventsRepository>().ToConstant(mockEvents.Object).WithConstructorArgument(efDbContext);
+           // this.kernel.Bind<IEventsRepository>().ToConstant(mockEvents.Object).WithConstructorArgument(efDbContext);
+            this.kernel.Bind<IEventsRepository>().To<EFEventsRepository>().WithConstructorArgument(efDbContext);
             this.kernel.Bind<IRegistrationRepository>().To<EFRegistrationRepository>().WithConstructorArgument(efDbContext);
             this.kernel.Bind<IRegisterProcessor>().To<RegisterProcessor>().WithConstructorArgument(efDbContext);
             this.kernel.Bind<ISettingsRepository>().To<EFSettingsRepository>().WithConstructorArgument(efDbContext);
             this.kernel.Bind<IInformationRepository>().To<EFInformationRepository>().WithConstructorArgument(efDbContext);
+            this.kernel.Bind<ICollector>().To<RepositoryCollector>();
 
             var credentials = new AwsServiceCredentials("freeimg", "AKIAJEWFJ4CAGVG2VENQ", "R+uqBsWUB+xQ2YirL+RtYX5oP4eD9stc06lEvuYg");
             this.kernel.Bind<IContentService>().To<AwsContentService>().WithConstructorArgument(credentials);
-
-            this.kernel.Bind<ICollector>().To<RepositoryCollector>();
         }
     }
 }
