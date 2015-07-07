@@ -21,7 +21,7 @@ namespace PsychologyVisitSite.Domain.Abstract
         {
             get
             {
-                Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DbContext>());
+                Database.SetInitializer(new DropCreateDatabaseIfModelChanges<C>());
                 return this.Context.Set<T>();
             }
         }

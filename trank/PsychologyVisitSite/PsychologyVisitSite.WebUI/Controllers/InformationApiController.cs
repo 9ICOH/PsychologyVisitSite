@@ -1,6 +1,8 @@
 ﻿
 namespace PsychologyVisitSite.WebUI.Controllers
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
@@ -37,7 +39,24 @@ namespace PsychologyVisitSite.WebUI.Controllers
         public string GetMainImgUrl()
         {
             var inform = this.informationRepository.LastOrDefault();
-            return inform != null ? inform.ImageUrl : string.Empty;
+            return inform != null ? this.contentService.GenerateContentUrl(inform.ImageKey) : string.Empty;
+        }
+
+        [HttpGet]
+        public IEnumerable<string> GetMainImgUrls()
+        {
+            var inform = this.informationRepository.All();
+            var urls = new List<string>();
+            
+            if (inform != null)
+            {
+                foreach (var information in inform)
+                {
+                    urls.Add(this.contentService.GenerateContentUrl(information.ImageKey));
+                }
+            }
+
+            return urls;
         }
 
         [HttpPost]
@@ -59,7 +78,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
 
                 this.informationRepository.Create(new Information
                                                                           {
-                                                                              ImageUrl = this.contentService.GenerateContentUrl(filename)
+                                                                              ImageKey = filename
                                                                           });
             }
             return this.Ok("файлы загружены");

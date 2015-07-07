@@ -1,22 +1,39 @@
-﻿.img_wrapper{
+﻿#slideshow {
     position: relative;
-    padding-top: 75%;
-    overflow: hidden;
+    margin: 10px 20px 10px 10px;
+    height: 800px;
+    width: 700px;
 }
- 
-.img_wrapper img{
-    position: absolute;
+
+    #slideshow IMG {
+        height: inherit;
+        width: inherit;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 8;
+    }
+
+        #slideshow IMG.active {
+            height: inherit;
+            width: inherit;
+            z-index: 10;
+        }
+
+        #slideshow IMG.last-active {
+            height: inherit;
+            width: inherit;
+            z-index: 9;
+        }
+
+#img_wrapper img {
+    height: 120px;
+    width: 100px;
+    position: relative;
+    margin: 10px 20px 10px 10px;
     top: 0;
-    width: 100%;
-    opacity: 0;
 }
 
-.img_wrapper.loaded img{
-    opacity: 1;
-}
-
-.main_img {
-    height: 600px; /* Высота блока */
-    width: 500px; /* Ширина блока */
-    position: relative;
+.modal-lg {
+  width: 1200px;
 }
