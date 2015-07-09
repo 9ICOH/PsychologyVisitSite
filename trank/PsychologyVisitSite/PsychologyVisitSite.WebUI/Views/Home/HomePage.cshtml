@@ -31,14 +31,28 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div class="tab-pane fade in active" id="home">
+            <div class="tab-pane fade in active" id="home" ng-init="updateLastInformation()">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                    <div class="container">
+                        <button class="btn btn-primary navbar-right " data-toggle="modal" data-target="#editHomeModal"><span class="glyphicon glyphicon-star"></span>Edit page</button>
+                    </div>
+                </nav>
 
-                <div id="homeCarousel" class="carousel slide" data-interval="3000" data-ride="carousel" ng-init="getImgUrls()">
+                <div id="homeCarousel" class="carousel slide" data-interval="3000" data-ride="carousel" ng-init="updateImgUrls()">
                     <!-- Indicators -->
-                    <ol class="carousel-indicators" id="homeCarouselIndicators"></ol>
+                    <ol class="carousel-indicators" id="homeCarouselIndicators">
+                        <li data-target="#homeCarousel" data-slide-to="{{$index}}" ng-class="{'active': $index ==0 }" ng-repeat="image in carouselImages"></li>
+                    </ol>
 
                     <!-- Wrapper for slides -->
-                    <div class="carousel-inner" id="homeCarouselInner"></div>
+                    <div class="carousel-inner" id="homeCarouselInner">
+                        <div ng-class="{'active item': $index ==0 }" class="item" ng-repeat="image in carouselImages">
+                            <img id="slideshow" src="{{image}}" alt="">
+                            <div class="carousel-caption">
+                                ...
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Controls -->
                     <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
@@ -49,19 +63,36 @@
                     </a>
                 </div>
 
-                <button class="btn btn-primary btn-primary" data-toggle="modal" data-target="#editHomeModal">Edit page</button>
+                <div class="jumbotron">
+                    <h1>Описание сайта</h1>
+                    <p class="text-center">
+                        {{lastInformation.SiteDescription}}
+                    </p>
+                </div>
             </div>
 
             <div class="tab-pane fade" id="events">
                 ...
             </div>
 
+            <div class="tab-pane fade" id="contacts">
+                <div id="contactInfo">
+                    <address>
+                        <strong>Psih, Inc.</strong><br>
+                        795 Folsom Ave, Suite 600<br>
+                        San Francisco, CA 94107<br>
+                        <abbr title="Phone">P:</abbr> (123) 456-7890
+                    </address>
 
-            <div class="tab-pane fade" id="contacts">...</div>
+                    <address>
+                        <strong>Full Name</strong><br>
+                        <a href="mailto:#">first.last@example.com</a>
+                    </address>
+                </div>
+            </div>
 
             <div class="tab-pane fade" id="registrations">
-                <div ng-controller="RegistrationsCtrl" ng-cloak ng-init="getLastRegistration()">
-                    <button class="btn btn-primary btn-primary" data-toggle="modal" data-target="#registrationModal">Registrate</button>
+                <div ng-controller="RegistrationsCtrl" ng-cloak ng-init="updateLastRegistration()">
                     <!-- Modal -->
                     <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -127,9 +158,6 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-
-
-                    <button class="btn btn-primary btn-primary" data-toggle="modal" data-target="#modal-lg" ng-click="getAllRegistrations()">View registrations</button>
                     <!-- Modal -->
                     <div class="modal fade" id="modal-lg" tabindex="-1" role="dialog" aria-labelledby="registrationsModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -172,6 +200,13 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
+
+
+                    <div id="adminPanel">
+                        <button class="btn btn-primary btn-primary" data-toggle="modal" data-target="#registrationModal">Registrate</button>
+                        <button class="btn btn-primary btn-primary" data-toggle="modal" data-target="#modal-lg" ng-click="updateAllRegistrations()">View registrations</button>
+                    </div>
+
                 </div>
 
 
@@ -188,17 +223,29 @@
                         <h4 class="modal-title" id="editHomeModalLabel">Edit Home page</h4>
                     </div>
                     <div class="modal-body">
-                        <div id="drop_zone" class="form-control">Drop files here</div>
-                        @*<input type="file" name="files[]" id="uploadImgs" multiple />*@
-                        <ul class="list-unstyled list-inline" id="list"></ul>
+                        <div>
+                            <h4>Картинки на главной странице</h4>
+
+                            <div id="drop_zone" class="form-control">
+                                Drop images here
+                            </div>
+                            <ul class="list-unstyled list-inline" id="list"></ul>
+                        </div>
+
+                        <div>
+                            <h4>Описание сайта</h4>
+                            <textarea class="form-control" rows="3">{{lastInformation.SiteDescription}}</textarea>
+                        </div>
+
+
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" ng-cloak ng-click="uploadImage()">Save</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
 
     </div>
 

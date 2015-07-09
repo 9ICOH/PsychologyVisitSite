@@ -132,7 +132,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ErrorStyle.css" />
-    <Content Include="Content\ImagesStyle.css" />
+    <Content Include="Content\HomePageStyle.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-animate.js" />
@@ -160,8 +160,9 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\app\Meetings\MeetingEvents.js" />
-    <Content Include="Scripts\app\Registrations\Registrations.js" />
+    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\Meetings\meetingEventsController.js" />
+    <Content Include="Scripts\app\Registrations\registrationsController.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\errors.json" />
@@ -931,7 +932,7 @@
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\app\Home\Main.js" />
+    <Content Include="Scripts\app\Home\mainPageController.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -960,6 +961,7 @@
     <Content Include="Views\Home\HomePage.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Home\EditHomePageWindow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
