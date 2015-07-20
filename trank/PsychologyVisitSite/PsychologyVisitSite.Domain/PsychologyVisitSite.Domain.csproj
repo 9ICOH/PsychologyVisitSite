@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\EfRepository.cs" />
+    <Compile Include="Abstract\IAuthenticationRepository.cs" />
     <Compile Include="Abstract\IAuthProvider.cs" />
     <Compile Include="Abstract\IContentService.cs" />
     <Compile Include="Abstract\IEventsRepository.cs" />
@@ -92,6 +93,10 @@
     <Compile Include="Abstract\IRegistrationRepository.cs" />
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Abstract\ISettingsRepository.cs" />
+    <Compile Include="Concrete\EFAuthenticationRepository.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Service\AwsContentService.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFEventsRepository.cs" />

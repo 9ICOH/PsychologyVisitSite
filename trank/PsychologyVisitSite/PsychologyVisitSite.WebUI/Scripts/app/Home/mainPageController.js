@@ -11,16 +11,14 @@ function ($scope, $http) {
            });
     };
 
-    $scope.updateImgUrls = function() {
+    $scope.updateImgUrls = function () {
         $http({ method: "GET", url: "/api/InformationApi/GetMainImgUrls" }).
-            success(function(srcList) {
+            success(function (srcList) {
                 $scope.carouselImages = srcList;
             }).
-            error(function(data, status) {
+            error(function (data, status) {
                 $scope.data = data || "Request failed";
                 $scope.status = status;
             });
     };
 });
-
-

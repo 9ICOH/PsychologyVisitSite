@@ -1,7 +1,6 @@
 ﻿
 namespace PsychologyVisitSite.WebUI.Controllers
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -9,6 +8,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
 
     using PsychologyVisitSite.Domain.Abstract;
     using PsychologyVisitSite.Domain.Entities;
+
 
     public class InformationApiController : ApiController
     {
@@ -22,6 +22,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
             this.contentService = contentService;
         }
 
+        [Authorize]
         [HttpPost]
         public Information AddInformationItem(Information informationItem)
         {
@@ -47,7 +48,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
         {
             var inform = this.informationRepository.All();
             var urls = new List<string>();
-            
+
             if (inform != null)
             {
                 foreach (var information in inform)
@@ -59,8 +60,9 @@ namespace PsychologyVisitSite.WebUI.Controllers
             return urls;
         }
 
+        [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> UploadFile()
+        public async Task<IHttpActionResult> UploadFiles()
         {
             if (!Request.Content.IsMimeMultipartContent())
             {
@@ -77,9 +79,9 @@ namespace PsychologyVisitSite.WebUI.Controllers
                 this.contentService.UploadContentObject(fileStream, filename);
 
                 this.informationRepository.Create(new Information
-                                                                          {
-                                                                              ImageKey = filename
-                                                                          });
+                {
+                    ImageKey = filename
+                });
             }
             return this.Ok("файлы загружены");
         }

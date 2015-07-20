@@ -161,6 +161,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\Home\mainPageEditor.js" />
     <Content Include="Scripts\app\Meetings\meetingEventsController.js" />
     <Content Include="Scripts\app\Registrations\registrationsController.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -941,6 +942,12 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authentication\AuthHttpModule.cs" />
+    <Compile Include="Authentication\CustomAuthentication.cs" />
+    <Compile Include="Authentication\IAuthentication.cs" />
+    <Compile Include="Authentication\IUserProvider.cs" />
+    <Compile Include="Authentication\UserIndentity.cs" />
+    <Compile Include="Authentication\UserProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformationApiController.cs" />
     <Compile Include="Controllers\MeetingEventsApiController.cs" />
