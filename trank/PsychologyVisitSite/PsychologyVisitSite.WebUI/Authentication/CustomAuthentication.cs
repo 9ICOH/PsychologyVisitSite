@@ -20,13 +20,16 @@ namespace PsychologyVisitSite.WebUI.Authentication
         public HttpContext HttpContext { get; set; }
 
         [Inject]
-        public IAuthenticationRepository Repository { get; set; }
+        public IUsersRepository UsersRepository { get; set; }
+
+        [Inject]
+        public IUserRoleRepository UserRoleRepository { get; set; }
 
         #region IAuthentication Members
 
         public User Login(string userName, string password, bool isPersistent)
         {
-            User retUser = Repository.Login(userName, password);
+            User retUser = this.UsersRepository.Login(userName, password);
             if (retUser != null)
             {
                 CreateCookie(userName, isPersistent);
@@ -36,7 +39,7 @@ namespace PsychologyVisitSite.WebUI.Authentication
 
         public User Login(string userName)
         {
-            User retUser = Repository.Find(p => string.Compare(p.Email, userName, true) == 0);
+            User retUser = this.UsersRepository.Find(p => string.Compare(p.Email, userName, true) == 0);
             if (retUser != null)
             {
                 CreateCookie(userName);
@@ -90,17 +93,17 @@ namespace PsychologyVisitSite.WebUI.Authentication
                         if (authCookie != null && !string.IsNullOrEmpty(authCookie.Value))
                         {
                             var ticket = FormsAuthentication.Decrypt(authCookie.Value);
-                            this.currentUser = new UserProvider(ticket.Name, Repository);
+                            this.currentUser = new UserProvider(ticket.Name, this.UsersRepository, this.UserRoleRepository);
                         }
                         else
                         {
-                            this.currentUser = new UserProvider(null, null);
+                            this.currentUser = new UserProvider(null, null, null);
                         }
                     }
                     catch (Exception ex)
                     {
                         logger.Error("Failed authentication: " + ex.Message);
-                        this.currentUser = new UserProvider(null, null);
+                        this.currentUser = new UserProvider(null, null, null);
                     }
                 }
                 return this.currentUser;

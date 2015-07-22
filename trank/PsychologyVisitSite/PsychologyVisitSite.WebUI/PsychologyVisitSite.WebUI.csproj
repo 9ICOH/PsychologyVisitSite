@@ -950,6 +950,7 @@
     <Compile Include="Authentication\UserProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformationApiController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MeetingEventsApiController.cs" />
     <Compile Include="Controllers\RegistrationApiController.cs" />
     <Compile Include="Global.asax.cs">

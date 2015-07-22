@@ -3,7 +3,7 @@ namespace PsychologyVisitSite.Domain.Abstract
 {
     using PsychologyVisitSite.Domain.Entities;
 
-    public interface IAuthenticationRepository : IRepository<User>
+    public interface IUsersRepository : IRepository<User>
     {
         User GetUser(string email);
 

@@ -9,6 +9,17 @@ namespace PsychologyVisitSite.WebUI.Authentication
     {
         private UserIndentity userIdentity;
 
+        public UserProvider(string name, IUsersRepository userRepository, IUserRoleRepository userRoleRepository)
+        {
+            userIdentity = new UserIndentity();
+            userIdentity.Init(name, userRepository, userRoleRepository);
+        }
+
+        public override string ToString()
+        {
+            return userIdentity.Name;
+        }
+
         #region IPrincipal Members
 
         public IIdentity Identity
@@ -25,22 +36,9 @@ namespace PsychologyVisitSite.WebUI.Authentication
             {
                 return false;
             }
-            return userIdentity.User.InRoles(role);
+            return userIdentity.InRoles(role);
         }
 
         #endregion
-
-
-        public UserProvider(string name, IAuthenticationRepository repository)
-        {
-            userIdentity = new UserIndentity();
-            userIdentity.Init(name, repository);
-        }
-
-
-        public override string ToString()
-        {
-            return userIdentity.Name;
-        }
     }
 }

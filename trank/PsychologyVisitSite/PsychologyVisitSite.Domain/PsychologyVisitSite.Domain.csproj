@@ -84,7 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\EfRepository.cs" />
-    <Compile Include="Abstract\IAuthenticationRepository.cs" />
+    <Compile Include="Abstract\IRoleRepository.cs" />
+    <Compile Include="Abstract\IUserRoleRepository.cs" />
+    <Compile Include="Abstract\IUsersRepository.cs" />
     <Compile Include="Abstract\IAuthProvider.cs" />
     <Compile Include="Abstract\IContentService.cs" />
     <Compile Include="Abstract\IEventsRepository.cs" />
@@ -93,7 +95,9 @@
     <Compile Include="Abstract\IRegistrationRepository.cs" />
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Abstract\ISettingsRepository.cs" />
-    <Compile Include="Concrete\EFAuthenticationRepository.cs" />
+    <Compile Include="Concrete\EFRoleRepository.cs" />
+    <Compile Include="Concrete\EfUsersRepository.cs" />
+    <Compile Include="Concrete\EFUserRoleRepository.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />

@@ -110,7 +110,11 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
             this.kernel.Bind<IRegistrationRepository>().To<EFRegistrationRepository>();
             this.kernel.Bind<ISettingsRepository>().To<EFSettingsRepository>();
             this.kernel.Bind<IInformationRepository>().To<EFInformationRepository>();
-
+            this.kernel.Bind<IUsersRepository>().To<EfUsersRepository>();
+            this.kernel.Bind<IUserRoleRepository>().To<EFUserRoleRepository>();
+            this.kernel.Bind<IRoleRepository>().To<EFRoleRepository>();
+            
+            
             this.kernel.Bind<IRegisterProcessor>().To<RegisterProcessor>();
 
             var credentials = new AwsServiceCredentials("freeimg", "AKIAJDYQFDSS2OOTDCKA", "TbhVijwMh+Ed4SoSXsGnQRrgNKV073f37mbP1PAF");

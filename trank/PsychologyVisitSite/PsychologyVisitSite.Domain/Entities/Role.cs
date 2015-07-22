@@ -8,7 +8,5 @@ namespace PsychologyVisitSite.Domain.Entities
        public string Code { get; set; }
 
        public string Name { get; set; }
-
-       public UserRole UserRoles { get; set; }
     }
 }
