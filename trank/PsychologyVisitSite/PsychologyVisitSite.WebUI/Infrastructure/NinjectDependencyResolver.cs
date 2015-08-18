@@ -8,14 +8,12 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
     using Moq;
 
     using Ninject;
-    using Ninject.Web.Common;
 
     using PsychologyVisitSite.Domain.Abstract;
     using PsychologyVisitSite.Domain.Concrete;
     using PsychologyVisitSite.Domain.Entities;
     using PsychologyVisitSite.Domain.Enums;
     using PsychologyVisitSite.Domain.Service;
-    using PsychologyVisitSite.WebUI.Authentication;
 
     public class NinjectDependencyResolver : IDependencyResolver
     {
@@ -120,7 +118,6 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
             var credentials = new AwsServiceCredentials("freeimg", "AKIAJDYQFDSS2OOTDCKA", "TbhVijwMh+Ed4SoSXsGnQRrgNKV073f37mbP1PAF");
             this.kernel.Bind<IContentService>().To<AwsContentService>().WithConstructorArgument(credentials);
             ///Authentication from http://habrahabr.ru/post/176043/
-            kernel.Bind<IAuthentication>().To<CustomAuthentication>().InRequestScope();
         }
     }
 }

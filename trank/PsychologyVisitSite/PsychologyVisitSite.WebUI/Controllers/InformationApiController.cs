@@ -8,7 +8,6 @@ namespace PsychologyVisitSite.WebUI.Controllers
 
     using PsychologyVisitSite.Domain.Abstract;
     using PsychologyVisitSite.Domain.Entities;
-    using PsychologyVisitSite.WebUI.Authentication;
 
     public class InformationApiController : ApiController
     {
@@ -16,13 +15,11 @@ namespace PsychologyVisitSite.WebUI.Controllers
 
         private readonly IContentService contentService;
 
-        private readonly IAuthentication auth;
 
-        public InformationApiController(IInformationRepository informationRepository, IContentService contentService, IAuthentication auth)
+        public InformationApiController(IInformationRepository informationRepository, IContentService contentService)
         {
             this.informationRepository = informationRepository;
             this.contentService = contentService;
-            this.auth = auth;
         }
 
         [Authorize]
@@ -49,8 +46,6 @@ namespace PsychologyVisitSite.WebUI.Controllers
         [HttpGet]
         public IEnumerable<string> GetMainImgUrls()
         {
-            var t = ((IUserProvider)auth.CurrentUser.Identity).User;
-
             var inform = this.informationRepository.All();
             var urls = new List<string>();
 
