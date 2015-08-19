@@ -65,10 +65,7 @@ namespace PsychologyVisitSite.WebUI.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             System.Web.Mvc.DependencyResolver.SetResolver(new Infrastructure.NinjectDependencyResolver(kernel));
-
-           // System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = new Ninject.WebApi.DependencyResolver.NinjectDependencyResolver(kernel);
-            var t = kernel.Get<System.Web.Http.Dependencies.IDependencyResolver>();
-            System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = t;
+            System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = new Ninject.WebApi.DependencyResolver.NinjectDependencyResolver(kernel);
         }        
     }
 }

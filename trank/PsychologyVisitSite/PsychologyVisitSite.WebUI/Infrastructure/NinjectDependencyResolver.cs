@@ -3,11 +3,12 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
+    using System.Web.Http.Dependencies;
 
     using Moq;
 
     using Ninject;
+    using Ninject.WebApi.DependencyResolver;
 
     using PsychologyVisitSite.Domain.Abstract;
     using PsychologyVisitSite.Domain.Concrete;
@@ -15,24 +16,21 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
     using PsychologyVisitSite.Domain.Enums;
     using PsychologyVisitSite.Domain.Service;
 
-    public class NinjectDependencyResolver : IDependencyResolver
+    public class NinjectDependencyResolver : NinjectDependencyScope, IDependencyResolver, System.Web.Mvc.IDependencyResolver
     {
         private readonly IKernel kernel;
 
         public NinjectDependencyResolver(IKernel kernelParam)
+            : base(kernelParam)
         {
             this.kernel = kernelParam;
             this.AddBindings();
         }
 
-        public object GetService(Type serviceType)
+       
+        public IDependencyScope BeginScope()
         {
-            return this.kernel.TryGet(serviceType);
-        }
-
-        public IEnumerable<object> GetServices(Type serviceType)
-        {
-            return this.kernel.GetAll(serviceType);
+            return new NinjectDependencyScope(this.kernel.BeginBlock());
         }
 
         private void AddBindings()
