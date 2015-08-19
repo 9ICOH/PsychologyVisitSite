@@ -4,25 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="~/Content/ErrorStyle.css" rel="stylesheet" />
-    <link href="~/Content/HomePageStyle.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-2.1.4.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
-    
-    <script src="~/Scripts/app/app.js"></script>
-    <script src="~/Scripts/app/Home/mainPageController.js"></script>
-    <script src="~/Scripts/app/Home/mainPageEditor.js"></script>
-    <script src="~/Scripts/app/Registrations/registrationsController.js"></script>
-    <script src="~/Scripts/app/Meetings/meetingEventsController.js"></script>
-
-
     <title>@ViewBag.Title</title>
+    
+    @Styles.Render("~/Content/bootstrapCss")
+    @Styles.Render("~/Content/css")
+   
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/app")
+
+    
     @RenderSection("Scripts")
 </head>
 

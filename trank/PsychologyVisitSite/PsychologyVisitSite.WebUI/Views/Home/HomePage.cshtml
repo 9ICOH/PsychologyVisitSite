@@ -41,11 +41,11 @@
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" id="homeCarouselInner">
-                        <div ng-class="{'active item': $index ==0 }" class="item" ng-repeat="image in carouselImages">
+                        <div ng-class="{'active item': $index ==0 }" class="item" ng-repeat="image in carouselImages track by $index">
                             <img id="slideshow" src="{{image}}" alt="">
                             @*<div class="carousel-caption">
-                                    ...
-                                </div>*@
+                ...
+            </div>*@
                         </div>
                     </div>
 
