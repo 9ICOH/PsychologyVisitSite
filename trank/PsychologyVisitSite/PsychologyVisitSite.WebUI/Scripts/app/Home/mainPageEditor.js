@@ -1,4 +1,4 @@
-﻿app.controller('MainEditorCtrl',
+﻿app.controller('MainEditorCtrl', ['$scope', '$http',
 function ($scope, $http) {
 
     $scope.imageDropped = function () {
@@ -45,9 +45,9 @@ function ($scope, $http) {
         }
     };
 
-});
+}]);
 
-app.directive("imagedrop", function ($parse, $document) {
+app.directive("imagedrop", ['$parse', '$document', function ($parse, $document) {
     return {
         restrict: "A",
         link: function (scope, element, attrs) {
@@ -80,4 +80,4 @@ app.directive("imagedrop", function ($parse, $document) {
                    });
         }
     };
-});
+}]);

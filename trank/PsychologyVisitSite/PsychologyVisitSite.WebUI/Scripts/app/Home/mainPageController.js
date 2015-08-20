@@ -1,4 +1,4 @@
-﻿app.controller('MainCtrl',
+﻿app.controller('MainCtrl',['$scope', '$http',
 function ($scope, $http) {
     $scope.updateLastInformation = function () {
         $http({ method: "GET", url: "/api/InformationApi/LastInformation" }).
@@ -21,4 +21,4 @@ function ($scope, $http) {
                 $scope.status = status;
             });
     };
-});
+}]);

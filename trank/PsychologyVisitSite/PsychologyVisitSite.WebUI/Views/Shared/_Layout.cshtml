@@ -5,16 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    
-    @Styles.Render("~/Content/bootstrapCss")
-    @Styles.Render("~/Content/css")
-   
+
     @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/css")
+
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/app")
 
-    
     @RenderSection("Scripts")
 </head>
 

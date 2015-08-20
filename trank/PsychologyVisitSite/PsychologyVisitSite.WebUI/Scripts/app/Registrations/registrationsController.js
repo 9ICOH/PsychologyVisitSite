@@ -1,5 +1,5 @@
-﻿app.controller('RegistrationsCtrl',
-    function($scope, $http) {
+﻿app.controller('RegistrationsCtrl',['$scope', '$http',
+    function ($scope, $http) {
         $scope.registration = {}
 
         $scope.updateAllRegistrations = function() {
@@ -36,4 +36,4 @@
                 });
         }
 
-    });
+    }]);

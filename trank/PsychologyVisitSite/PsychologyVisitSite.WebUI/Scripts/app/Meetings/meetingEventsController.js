@@ -1,4 +1,5 @@
-﻿function MeetingEventsCtrl($scope, $http) {
+﻿app.controller('MeetingEventsCtrl',['$scope', '$http',
+function ($scope, $http) {
 
     $scope.updateMeetingEvents = function () {
         $http({ method: "GET", url: "/api/MeetingEventsApi/NearestEvent" }).
@@ -11,4 +12,4 @@
            });
     };
 
-}
+}]);

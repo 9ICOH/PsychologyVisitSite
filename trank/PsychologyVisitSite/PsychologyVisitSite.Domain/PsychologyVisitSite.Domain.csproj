@@ -99,6 +99,7 @@
     <Compile Include="Concrete\EFRoleRepository.cs" />
     <Compile Include="Concrete\EfUsersRepository.cs" />
     <Compile Include="Concrete\EFUserRoleRepository.cs" />
+    <Compile Include="Concrete\FormAuthProvider.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
@@ -108,7 +109,6 @@
     <Compile Include="Concrete\EFInformationRepository.cs" />
     <Compile Include="Concrete\EFRegistrationRepository.cs" />
     <Compile Include="Concrete\EFSettingsRepository.cs" />
-    <Compile Include="Concrete\FormAuthProvider.cs" />
     <Compile Include="Concrete\RegisterProcessor.cs" />
     <Compile Include="Entities\Information.cs" />
     <Compile Include="Entities\Settings.cs" />
