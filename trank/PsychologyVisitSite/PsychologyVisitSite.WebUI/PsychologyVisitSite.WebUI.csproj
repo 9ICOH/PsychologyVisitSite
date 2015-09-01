@@ -208,6 +208,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\Home\mainPageEditor.js" />
+    <Content Include="Scripts\app\Login\accountController.js" />
     <Content Include="Scripts\app\Meetings\meetingEventsController.js" />
     <Content Include="Scripts\app\Registrations\registrationsController.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -990,6 +991,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AppDbInitializer.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
@@ -1034,8 +1036,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Infrastructure\Binders\" />
-    <Folder Include="Scripts\app\Login\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PsychologyVisitSite.Domain\PsychologyVisitSite.Domain.csproj">

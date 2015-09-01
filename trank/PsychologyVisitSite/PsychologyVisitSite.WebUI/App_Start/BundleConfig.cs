@@ -6,7 +6,6 @@ namespace PsychologyVisitSite.WebUI.App_Start
     public class BundleConfig
     {
 
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.UseCdn = true;
@@ -34,10 +33,10 @@ namespace PsychologyVisitSite.WebUI.App_Start
                     "~/Scripts/app/Home/mainPageController.js",
                     "~/Scripts/app/Home/mainPageEditor.js",
                     "~/Scripts/app/Registrations/registrationsController.js",
-                    "~/Scripts/app/Meetings/meetingEventsController.js"));
+                    "~/Scripts/app/Meetings/meetingEventsController.js",
+                    "~/Scripts/app/Login/accountController.js"
+                    ));
 
-            // Set EnableOptimizations to false for debugging. For more information,
-            // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = false;
         }
     }

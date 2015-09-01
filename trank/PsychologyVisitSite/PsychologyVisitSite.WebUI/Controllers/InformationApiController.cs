@@ -2,6 +2,7 @@
 namespace PsychologyVisitSite.WebUI.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
@@ -49,7 +50,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
             var inform = this.informationRepository.All();
             var urls = new List<string>();
 
-            if (inform != null)
+            if (inform != null && inform.Count() != 0)
             {
                 foreach (var information in inform)
                 {

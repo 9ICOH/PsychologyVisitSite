@@ -38,6 +38,7 @@ namespace PsychologyVisitSite.WebUI
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+            
             return manager;
         }
     }

@@ -1,7 +1,6 @@
 ﻿
 namespace PsychologyVisitSite.WebUI.Infrastructure
 {
-    using System;
     using System.Collections.Generic;
     using System.Web.Http.Dependencies;
 
@@ -26,8 +25,7 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
             this.kernel = kernelParam;
             this.AddBindings();
         }
-
-       
+        
         public IDependencyScope BeginScope()
         {
             return new NinjectDependencyScope(this.kernel.BeginBlock());
@@ -106,16 +104,11 @@ namespace PsychologyVisitSite.WebUI.Infrastructure
             this.kernel.Bind<IRegistrationRepository>().To<EFRegistrationRepository>();
             this.kernel.Bind<ISettingsRepository>().To<EFSettingsRepository>();
             this.kernel.Bind<IInformationRepository>().To<EFInformationRepository>();
-            this.kernel.Bind<IUsersRepository>().To<EfUsersRepository>();
-            this.kernel.Bind<IUserRoleRepository>().To<EFUserRoleRepository>();
-            this.kernel.Bind<IRoleRepository>().To<EFRoleRepository>();
-            
             
             this.kernel.Bind<IRegisterProcessor>().To<RegisterProcessor>();
 
             var credentials = new AwsServiceCredentials("freeimg", "AKIAJDYQFDSS2OOTDCKA", "TbhVijwMh+Ed4SoSXsGnQRrgNKV073f37mbP1PAF");
             this.kernel.Bind<IContentService>().To<AwsContentService>().WithConstructorArgument(credentials);
-            ///Authentication from http://habrahabr.ru/post/176043/
         }
     }
 }
