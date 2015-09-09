@@ -10,26 +10,9 @@ namespace PsychologyVisitSite.WebUI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                null,
-                "{controller}/{action}",
-                new { controller = "Nav", action = "FlexMenu" });
-
-            routes.MapRoute(
-                null,
-               "{controller}/{action}",
-               new { controller = "MeetingEvents", action = "EventSummary" });
-
-            routes.MapRoute(
-                name: "Registration",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Registration", action = "Registrate", id = UrlParameter.Optional });
-
-            routes.MapRoute(null, "{controller}/{action}");
-
-            routes.MapRoute(
-                name: "Home",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "HomePage", id = UrlParameter.Optional });
+                    name: "Home",
+                    url: "{controller}/{action}/{id}",
+                    defaults: new { controller = "Home", action = "HomePage", id = UrlParameter.Optional });
 
             routes.MapRoute(
                 name: "Default",

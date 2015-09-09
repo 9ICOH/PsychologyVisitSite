@@ -8,6 +8,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
     using PsychologyVisitSite.Domain.Abstract;
     using PsychologyVisitSite.Domain.Entities;
 
+    [Authorize]
     public class RegistrationApiController : ApiController
     {
         private readonly IRegistrationRepository registrationRepository;
@@ -45,6 +46,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
             return this.registrationRepository.All().ToArray();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public RegistrationForm AddRegistrationItem(RegistrationForm registration)
         {

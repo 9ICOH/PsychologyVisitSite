@@ -22,7 +22,7 @@ namespace PsychologyVisitSite.WebUI
             roleManager.Create(role2);
 
             var admin = new ApplicationUser { Email = "9icoh@mail.ru", UserName = "9icoh" };
-            var password = "Vbh2015";
+            var password = "Vbh_2015";
             var result = userManager.Create(admin, password);
 
             if (result.Succeeded)

@@ -11,10 +11,16 @@ function ($scope, $http) {
                     imgsData.append("file" + x, files[x]);
                 }
 
+                var token = sessionStorage.getItem('accessToken');
+                var headers = {};
+                if (token) {
+                    headers.Authorization = 'Bearer ' + token;
+                }
+
                 sendSimpleAjaxRequest("POST",
                      function (result) {
                          alert(result);
-                     }, "InformationApi/UploadFiles", imgsData);
+                     }, "InformationApi/UploadFiles", imgsData, headers);
             } else {
                 alert("Браузер не поддерживает загрузку файлов HTML5!");
             }

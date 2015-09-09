@@ -31,12 +31,14 @@ namespace PsychologyVisitSite.WebUI.Controllers
             return events;
         }
 
+        [Authorize]
         [HttpPost]
         public MeetingEvent AddMeetingEvent(MeetingEvent meetingEvent)
         {
             return this.eventsRepository.Create(meetingEvent);
         }
 
+        [Authorize]
         [HttpDelete]
         public void DeleteMeetingEvent(int id)
         {

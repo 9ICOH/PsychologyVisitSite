@@ -22,14 +22,7 @@ namespace PsychologyVisitSite.WebUI.Controllers
             this.informationRepository = informationRepository;
             this.contentService = contentService;
         }
-
-        [Authorize]
-        [HttpPost]
-        public Information AddInformationItem(Information informationItem)
-        {
-            return this.informationRepository.Create(informationItem);
-        }
-
+        
         [HttpGet]
         public Information LastInformation()
         {
@@ -59,6 +52,13 @@ namespace PsychologyVisitSite.WebUI.Controllers
             }
 
             return urls;
+        }
+
+        [Authorize]
+        [HttpPost]
+        public Information AddInformationItem(Information informationItem)
+        {
+            return this.informationRepository.Create(informationItem);
         }
 
         [Authorize]
